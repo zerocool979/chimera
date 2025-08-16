@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Chimera: A Pixel Art Symphony</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Layar pemuatan untuk transisi yang elegan saat mesin diinisialisasi -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Menenun Realitas...</p>
+    </div>
+
+    <!-- Canvas utama adalah satu-satunya elemen yang dibutuhkan untuk rendering dunia -->
+    <canvas id="scene-canvas" aria-hidden="true"></canvas>
+
+    <!-- Lapisan UI di atas canvas untuk elemen interaktif -->
+    <div class="ui-layer">
+        <div id="character" role="button" aria-label="Karakter. Klik untuk berinteraksi.">
+            <div class="character-body"></div>
+            <div class="character-blink"></div>
+        </div>
+
+        <!-- Panel Kontrol Pengguna -->
+        <div class="controls" role="toolbar" aria-label="Kontrol Pemandangan">
+            <button id="control-time" title="Percepat Waktu (D)" aria-label="Percepat Waktu">☀️</button>
+            <button id="control-season" title="Ganti Musim (S)" aria-label="Ganti Musim">🍂</button>
+            <button id="control-audio" title="Bisukan Audio (M)" aria-label="Bisukan atau Aktifkan Audio" aria-pressed="true">🔇</button>
+        </div>
+
+        <!-- Tampilan informasi dunia yang dinamis -->
+        <div id="world-info" aria-live="polite">
+            <span id="info-time"></span>
+            <span id="info-season"></span>
+            <span id="info-weather"></span>
+        </div>
+    </div>
+
+    <!-- Elemen Audio (sediakan file audio Anda) -->
+    <audio id="day-sound" loop src="{{ url_for('static', filename='audio/night.mp3') }}"></audio>
+    <audio id="night-sound" loop src="{{ url_for('static', filename='audio/night.mp3') }}"></audio>
+    <audio id="rain-sound" loop src="{{ url_for('static', filename='audio/rain.mp3') }}"></audio>
+    <audio id="thunder-sound" src="{{ url_for('static', filename='audio/thunder.mp3') }}"></audio>
+    <audio id="wind-sound" loop src="{{ url_for('static', filename='audio/whoosh.mp3') }}"></audio>
+
+    <!-- Titik masuk utama aplikasi modular JavaScript -->
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

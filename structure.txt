@@ -1,0 +1,33 @@
+chimera-project/
+├── app.py
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       ├── core/
+│       │   ├── Engine.js       # Mesin utama & game loop
+│       │   └── Ticker.js       # Pengelola waktu & delta time
+│       ├── entities/
+│       │   ├── Particle.js     # Kelas dasar untuk semua partikel
+│       │   ├── Star.js
+│       │   ├── Raindrop.js
+│       │   └── ... (dan partikel lainnya)
+│       ├── managers/
+│       │   ├── AudioManager.js
+│       │   ├── InputManager.js
+│       │   ├── UIManager.js
+│       │   └── EntityManager.js  # Pengelola semua entitas dinamis
+│       ├── renderer/
+│       │   ├── Renderer.js     # Orkestrator rendering utama
+│       │   ├── SkyLayer.js     # Merender langit, matahari, bulan
+│       │   ├── MountainLayer.js# Merender gunung prosedural
+│       │   ├── FloraLayer.js   # Merender pohon & tanaman musiman
+│       │   └── EntityLayer.js  # Merender semua partikel
+│       ├── world/
+│       │   └── World.js        # Otak simulasi (waktu, musim, cuaca)
+│       ├── utils/
+│       │   ├── constants.js    # Konstanta & konfigurasi
+│       │   └── helpers.js      # Fungsi utilitas
+│       └── main.js             # Titik masuk utama aplikasi
+└── templates/
+    └── index.html
