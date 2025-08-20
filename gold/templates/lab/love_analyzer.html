@@ -1,0 +1,60 @@
+{# File: templates/love_analyzer.html (di Proyek Portofolio) #}
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="terminal-interface">
+    <div class="terminal-header">
+        <h2>ML LOVE COMPATIBILITY ANALYSIS v2.0</h2>
+    </div>
+    <div class="terminal-output">
+        <p>Awaiting subject data for predictive analysis. All fields are mandatory.</p>
+        <p class="comment"># Note: Data is processed by a pre-trained ML model.</p>
+    </div>
+    
+    <form id="love-form-ml">
+        <fieldset>
+            <legend>// SUBJECT DATA // </legend>
+            <div class="form-group-inline">
+                <label for="gender">Gender (0=F, 1=M):</label><input type="number" id="gender" min="0" max="1" class="terminal-input" required>
+                <label for="age">Age:</label><input type="number" id="age" class="terminal-input" required>
+                <label for="race">Race Code:</label><input type="number" id="race" class="terminal-input" required>
+            </div>
+            <div class="form-group-inline">
+                <label for="age_o">Partner's Age:</label><input type="number" id="age_o" class="terminal-input" required>
+                <label for="race_o">Partner's Race Code:</label><input type="number" id="race_o" class="terminal-input" required>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>// PREFERENCE & BEHAVIOR // </legend>
+            <div class="form-group-inline">
+                <label for="importance_same_race">Importance (Same Race, 1-10):</label><input type="number" step="0.1" id="importance_same_race" class="terminal-input" required>
+                <label for="importance_same_religion">Importance (Same Religion, 1-10):</label><input type="number" step="0.1" id="importance_same_religion" class="terminal-input" required>
+            </div>
+            <div class="form-group-inline">
+                 <label for="field_cd">Field Code:</label><input type="number" id="field_cd" class="terminal-input" required>
+                 <label for="goal">Goal Code:</label><input type="number" id="goal" class="terminal-input" required>
+                 <label for="date_frequency">Dating Freq. Code:</label><input type="number" id="date_frequency" class="terminal-input" required>
+                 <label for="go_out_frequency">Go Out Freq. Code:</label><input type="number" id="go_out_frequency" class="terminal-input" required>
+            </div>
+             <div class="form-group">
+                <label for="interests_shared">Shared Interests (0.0-1.0):</label>
+                <input type="number" step="0.01" id="interests_shared" class="terminal-input-long" required>
+            </div>
+        </fieldset>
+        
+        <div class="form-buttons">
+            <button type="submit" class="btn-terminal">CALCULATE PROBABILITY</button>
+        </div>
+    </form>
+
+    <div id="result-container" class="terminal-output" style="margin-top: 20px;"></div>
+    <div class="navigation-buttons">
+        <a href="{{ url_for('main.lab') }}" class="btn-terminal">return_to_lab</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/love_analyzer_ml.js') }}"></script>
+{% endblock %}

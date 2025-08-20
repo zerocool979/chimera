@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Pelacakan Dokumen Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8860B;
+            --light-gold: #F5E8C0;
+            --deep-burgundy: #800020;
+            --dark-burgundy: #5A0017;
+            --navy-blue: #13274F;
+            --cream: #F7F2E6;
+            --dark-wood: #3C2A1E;
+            --light-wood: #7A5C3C;
+            --velvet: #2B0000;
+            --font-judul: 'Cinzel', serif;
+            --font-teks: 'Cormorant Garamond', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-teks);
+            background: linear-gradient(to bottom, var(--navy-blue), var(--dark-wood));
+            color: var(--cream);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            transition: opacity 1s ease-out;
+            position: relative;
+        }
+
+        /* Efek visual royal */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom, 
+                rgba(212, 175, 55, 0.05), 
+                rgba(212, 175, 55, 0.05) 1px, 
+                transparent 1px, 
+                transparent 3px
+            );
+            pointer-events: none;
+            z-index: 100;
+            animation: scanline 10s linear infinite;
+        }
+
+        @keyframes scanline {
+            from { background-position-y: 0; } 
+            to { background-position-y: 100px; }
+        }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/upuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1afLUkx8QnrIDQk2l0ScGzAAAAAElFTkSuQmCC');
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .ornament {
+            position: fixed;
+            font-size: 2rem;
+            color: var(--primary-gold);
+            opacity: 0.3;
+            z-index: 50;
+        }
+
+        .ornament-1 {
+            top: 20%;
+            left: 10%;
+            animation: glimmer 4s infinite;
+        }
+
+        .ornament-2 {
+            bottom: 20%;
+            right: 10%;
+            animation: glimmer 4s infinite 1s;
+        }
+
+        .ornament-3 {
+            top: 30%;
+            right: 15%;
+            animation: glimmer 4s infinite 2s;
+        }
+
+        .ornament-4 {
+            bottom: 30%;
+            left: 15%;
+            animation: glimmer 4s infinite 3s;
+        }
+
+        @keyframes glimmer {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
+
+        .royal-cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        .royal-cursor::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: linear-gradient(145deg, rgba(59, 42, 30, 0.9), rgba(35, 25, 20, 0.9));
+            border: 2px solid var(--dark-gold);
+            box-shadow: 0 0 25px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.3);
+            position: relative;
+            transform: scale(0.95);
+            animation: muncul 1s forwards ease-out;
+            z-index: 10;
+        }
+
+        @keyframes muncul {
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .kop-surat {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            background: linear-gradient(to right, var(--dark-burgundy), var(--deep-burgundy));
+            border-bottom: 3px double var(--primary-gold);
+        }
+
+        .logo-pixel {
+            width: 70px;
+            height: 70px;
+            margin-right: 20px;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 0 5px var(--primary-gold));
+        }
+
+        .judul-instansi h1, .judul-instansi p {
+            margin: 0;
+            font-family: var(--font-judul);
+            text-transform: uppercase;
+        }
+        .judul-instansi h1 {
+            font-size: 2rem;
+            letter-spacing: 1px;
+            color: var(--primary-gold);
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+        .judul-instansi p {
+            font-size: 1rem;
+            color: var(--light-gold);
+        }
+
+        .konten {
+            padding: 25px;
+            position: relative;
+        }
+        
+        .judul-dokumen {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .judul-dokumen h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            text-decoration: underline;
+            color: var(--primary-gold);
+            font-family: var(--font-judul);
+        }
+        .judul-dokumen p {
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            color: var(--light-gold);
+        }
+
+        .log-proses {
+            height: 200px;
+            background: repeating-linear-gradient(rgba(35, 25, 20, 0.7), rgba(35, 25, 20, 0.7) 23px, rgba(212, 175, 55, 0.1) 24px, rgba(212, 175, 55, 0.1) 24px);
+            border: 1px solid var(--dark-gold);
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 24px;
+            color: var(--light-gold);
+        }
+
+        .log-proses p {
+            margin: 0;
+            white-space: pre-wrap;
+            animation: ketik 0.5s forwards;
+        }
+
+        .log-proses p::after {
+            content: '█';
+            animation: kedip 1s infinite;
+            color: var(--primary-gold);
+        }
+        
+        @keyframes kedip { 50% { opacity: 0; } }
+        @keyframes ketik { from { width: 0; } to { width: 100%; } }
+
+        .progress-birokrasi {
+            list-style-type: none;
+            padding: 0;
+        }
+        .progress-birokrasi li {
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-left: 5px solid var(--dark-gold);
+            transition: all 0.5s ease-out;
+            opacity: 0.5;
+            font-size: 0.85rem;
+            color: var(--light-gold);
+            background: rgba(35, 25, 20, 0.5);
+        }
+        .progress-birokrasi li.proses {
+            border-left-color: var(--primary-gold);
+            background: linear-gradient(to right, rgba(212, 175, 55, 0.1), rgba(35, 25, 20, 0.5));
+            opacity: 1;
+            font-weight: bold;
+            color: var(--primary-gold);
+        }
+        .progress-birokrasi li.selesai {
+            border-left-color: var(--primary-gold);
+            background: linear-gradient(to right, rgba(212, 175, 55, 0.1), rgba(35, 25, 20, 0.5));
+            opacity: 0.8;
+            text-decoration: line-through;
+            color: var(--light-gold);
+        }
+        .progress-birokrasi li.tunda {
+            border-left-color: var(--deep-burgundy);
+            background: linear-gradient(to right, rgba(128, 0, 32, 0.1), rgba(35, 25, 20, 0.5));
+            animation: getar 0.3s 3;
+            opacity: 1;
+            font-weight: bold;
+            color: var(--light-gold);
+        }
+
+        @keyframes getar {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+
+        .stempel {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 5px solid;
+            border-radius: 50%;
+            text-align: center;
+            font-family: var(--font-judul);
+            font-weight: 700;
+            line-height: 1.2;
+            opacity: 0;
+            transform: scale(2) rotate(-30deg);
+            pointer-events: none;
+            background: rgba(35, 25, 20, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        #stempel-proses {
+            color: var(--primary-gold);
+            top: 60px;
+            right: 40px;
+            border-color: var(--primary-gold);
+        }
+        #stempel-setuju {
+            color: var(--primary-gold);
+            bottom: 20px;
+            right: 20px;
+            transform: scale(2.5) rotate(15deg);
+            border-color: var(--primary-gold);
+        }
+
+        .stempel.aktif {
+            animation: cap-muncul 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes cap-muncul {
+            to {
+                opacity: 0.9;
+                transform: scale(1) rotate(-10deg);
+            }
+        }
+        #stempel-setuju.aktif {
+             animation: cap-muncul-final 0.5s 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes cap-muncul-final {
+            to {
+                opacity: 0.9;
+                transform: scale(1) rotate(10deg);
+            }
+        }
+        .stempel span {
+            display: block;
+        }
+        .stempel .tanggal {
+            font-size: 0.8rem;
+            border-top: 2px solid;
+            border-bottom: 2px solid;
+            margin: 5px 10px;
+            padding: 2px 0;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 6rem;
+            font-family: var(--font-judul);
+            color: rgba(212, 175, 55, 0.05);
+            pointer-events: none;
+            text-transform: uppercase;
+            z-index: -1;
+        }
+
+        /* Efek hover untuk elemen interaktif */
+        .log-proses, .progress-birokrasi li {
+            transition: all 0.3s ease;
+        }
+
+        .log-proses:hover {
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .progress-birokrasi li:hover {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    <div class="royal-cursor"></div>
+    
+    <div class="ornament ornament-1">✦</div>
+    <div class="ornament ornament-2">✦</div>
+    <div class="ornament ornament-3">❦</div>
+    <div class="ornament ornament-4">❦</div>
+    
+    <div class="container">
+        <div class="watermark">ROYAL SEAL</div>
+        <header class="kop-surat">
+            <svg viewBox="0 0 16 16" class="logo-pixel" alt="Logo Tikus Berdasi">
+                <rect x="5" y="0" width="6" height="1" fill="#D4AF37"/>
+                <rect x="4" y="1" width="8" height="1" fill="#D4AF37"/>
+                <rect x="3" y="2" width="10" height="1" fill="#D4AF37"/>
+                <rect x="3" y="3" width="2" height="1" fill="#D4AF37"/><rect x="5" y="3" width="1" height="1" fill="#B8860B"/><rect x="6" y="3" width="4" height="1" fill="#D4AF37"/><rect x="10" y="3" width="1" height="1" fill="#B8860B"/><rect x="11" y="3" width="2" height="1" fill="#D4AF37"/>
+                <rect x="2" y="4" width="12" height="1" fill="#D4AF37"/>
+                <rect x="2" y="5" width="3" height="1" fill="#D4AF37"/><rect x="5" y="5" width="6" height="1" fill="#F7F2E6"/><rect x="11" y="5" width="3" height="1" fill="#D4AF37"/>
+                <rect x="1" y="6" width="3" height="1" fill="#D4AF37"/><rect x="4" y="6" width="1" height="1" fill="#F7F2E6"/><rect x="5" y="6" width="1" height="1" fill="#800020"/><rect x="6" y="6" width="4" height="1" fill="#F7F2E6"/><rect x="10" y="6" width="1" height="1" fill="#800020"/><rect x="11" y="6" width="1" height="1" fill="#F7F2E6"/><rect x="12" y="6" width="3" height="1" fill="#D4AF37"/>
+                <rect x="1" y="7" width="2" height="1" fill="#D4AF37"/><rect x="3" y="7" width="2" height="1" fill="#F7F2E6"/><rect x="5" y="7" width="2" height="1" fill="#800020"/><rect x="7" y="7" width="2" height="1" fill="#F7F2E6"/><rect x="9" y="7" width="2" height="1" fill="#800020"/><rect x="11" y="7" width="2" height="1" fill="#F7F2E6"/><rect x="13" y="7" width="2" height="1" fill="#D4AF37"/>
+                <rect x="0" y="8" width="2" height="1" fill="#D4AF37"/><rect x="2" y="8" width="1" height="1" fill="#F7F2E6"/><rect x="3" y="8" width="1" height="1" fill="#800020"/><rect x="4" y="8" width="1" height="1" fill="#F7F2E6"/><rect x="5" y="8" width="1" height="1" fill="#800020"/><rect x="6" y="8" width="4" height="1" fill="#F7F2E6"/><rect x="10" y="8" width="1" height="1" fill="#800020"/><rect x="11" y="8" width="1" height="1" fill="#F7F2E6"/><rect x="12" y="8" width="1" height="1" fill="#800020"/><rect x="13" y="8" width="1" height="1" fill="#F7F2E6"/><rect x="14" y="8" width="2" height="1" fill="#D4AF37"/>
+                <rect x="0" y="9" width="1" height="1" fill="#D4AF37"/><rect x="1" y="9" width="1" height="1" fill="#F7F2E6"/><rect x="2" y="9" width="1" height="1" fill="#800020"/><rect x="3" y="9" width="10" height="1" fill="#F7F2E6"/><rect x="13" y="9" width="1" height="1" fill="#800020"/><rect x="14" y="9" width="1" height="1" fill="#F7F2E6"/><rect x="15" y="9" width="1" height="1" fill="#D4AF37"/>
+                <rect x="0" y="10" width="1" height="1" fill="#D4AF37"/><rect x="1" y="10" width="2" height="1" fill="#F7F2E6"/><rect x="3" y="10" width="10" height="1" fill="#800020"/><rect x="13" y="10" width="2" height="1" fill="#F7F2E6"/><rect x="15" y="10" width="1" height="1" fill="#D4AF37"/>
+                <rect x="1" y="11" width="14" height="1" fill="#D4AF37"/>
+                <rect x="2" y="12" width="12" height="1" fill="#D4AF37"/>
+                <rect x="3" y="13" width="10" height="1" fill="#D4AF37"/>
+                <rect x="5" y="14" width="6" height="1" fill="#D4AF37"/>
+                <rect x="6" y="15" width="4" height="1" fill="#D4AF37"/>
+            </svg>
+            <div class="judul-instansi">
+                <h1>KEMENTERIAN PUSAT DATA NASIONAL</h1>
+                <p>Direktorat Jenderal Pengarsipan dan Pengiriman Informasi Digital</p>
+            </div>
+        </header>
+        <main class="konten">
+            <div class="judul-dokumen">
+                <h2>SURAT PERMOHONAN AKSES DATA</h2>
+                <p>Nomor: SPAD/2025/VIII/{{ 1000 + range(1, 100) | random }}</p>
+            </div>
+            <div class="log-proses" id="log-proses"></div>
+            
+            <ul class="progress-birokrasi" id="progress-birokrasi">
+                <li id="tahap-0">Pengajuan diterima oleh sistem</li>
+                <li id="tahap-1">Verifikasi kelengkapan formulir F-01</li>
+                <li id="tahap-2">Menunggu disposisi Kepala Seksi</li>
+                <li id="tahap-3">Analisis teknis oleh tim IT</li>
+                <li id="tahap-4">Istirahat makan siang (wajib)</li>
+                <li id="tahap-5">Pengecekan ulang data pemohon</li>
+                <li id="tahap-6">Menunggu persetujuan akhir</li>
+                <li id="tahap-7">Digitalisasi dan pengarsipan dokumen</li>
+            </ul>
+
+            <div class="stempel" id="stempel-proses">
+                <span>DIPROSES</span>
+                <span class="tanggal" id="tanggal-proses">-- AGU 2025</span>
+            </div>
+            <div class="stempel" id="stempel-setuju">
+                <span>DISETUJUI</span>
+                <span class="tanggal" id="tanggal-setuju">-- AGU 2025</span>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const redirectUrl = "/{{ target }}";
+        const logContainer = document.getElementById('log-proses');
+
+        // Efek kursor royal
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.royal-cursor');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Efek hover pada elemen interaktif
+        document.querySelectorAll('.log-proses, .progress-birokrasi li').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.querySelector('.royal-cursor').style.transform = 'translate(-50%, -50%) scale(1.5)';
+            });
+            el.addEventListener('mouseleave', () => {
+                document.querySelector('.royal-cursor').style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+
+        const tahapanProses = [
+            { id: 0, deskripsi: "Menerima dan mencatat permintaan Anda...", durasi: 500 },
+            { id: 1, deskripsi: "Memvalidasi kelengkapan dokumen digital (Formulir F-01)...", durasi: 500 },
+            { id: 1, deskripsi: "Kesalahan: Materai digital tidak terbaca. Mencoba lagi...", durasi: 1000, status: 'tunda' },
+            { id: 2, deskripsi: "Meneruskan ke meja Kepala Seksi Bidang Data...", durasi: 500 },
+            { id: 3, deskripsi: "Tim IT sedang menganalisis beban server. Mohon tunggu...", durasi: 1000 },
+            { id: 4, deskripsi: "SERVER SEDANG ISTIRAHAT. PROSES DIJEDA.", durasi: 1500, status: 'tunda' },
+            { id: 4, deskripsi: "Sistem kembali online. Melanjutkan proses...", durasi: 500 },
+            { id: 5, deskripsi: "Fotokopi KTP digital Anda sedang dilegalisir oleh sistem...", durasi: 500 },
+            { id: 6, deskripsi: "Menunggu tanda tangan digital dari pejabat berwenang...", durasi: 500 },
+            { id: 6, deskripsi: "Pejabat sedang rapat. Pengalihan ke sistem persetujuan otomatis...", durasi: 500, status: 'tunda'},
+            { id: 7, deskripsi: "Finalisasi: Dokumen sedang dicap dan diarsipkan secara digital...", durasi: 500 },
+            { id: 7, deskripsi: "SEMUA PROSES SELESAI. Mengalihkan ke halaman tujuan...", durasi: 1000 },
+        ];
+
+        let prosesSaatIni = 0;
+        let totalWaktu = 0;
+
+        function tampilkanLog(pesan) {
+            logContainer.innerHTML = '';
+            const p = document.createElement('p');
+            logContainer.appendChild(p);
+            
+            let i = 0;
+            const interval = setInterval(() => {
+                p.textContent += pesan[i];
+                i++;
+                if (i >= pesan.length) {
+                    clearInterval(interval);
+                }
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }, 20);
+        }
+
+        function updateChecklist(tahapId, status) {
+            for (let i = 0; i <= tahapId; i++) {
+                const item = document.getElementById(`tahap-${i}`);
+                if (i < tahapId) {
+                    item.className = 'selesai';
+                } else {
+                    item.className = status;
+                }
+            }
+        }
+
+        function jalankanProses() {
+            if (prosesSaatIni >= tahapanProses.length) {
+                document.getElementById('stempel-setuju').classList.add('aktif');
+                setTimeout(redirectToTarget, 1500);
+                return;
+            }
+
+            const tahap = tahapanProses[prosesSaatIni];
+            tampilkanLog(tahap.deskripsi);
+            updateChecklist(tahap.id, tahap.status || 'proses');
+            
+            if (prosesSaatIni === 2) {
+                document.getElementById('stempel-proses').classList.add('aktif');
+            }
+            
+            totalWaktu += tahap.durasi;
+            setTimeout(() => {
+                prosesSaatIni++;
+                jalankanProses();
+            }, tahap.durasi);
+        }
+
+        function redirectToTarget() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = redirectUrl;
+            }, 1000);
+        }
+        
+        const tanggalHariIni = new Date().getDate();
+        document.getElementById('tanggal-proses').textContent = `${tanggalHariIni} AGU 2025`;
+        document.getElementById('tanggal-setuju').textContent = `${tanggalHariIni} AGU 2025`;
+        
+        setTimeout(jalankanProses, 1000);
+    });
+    </script>
+</body>
+</html>

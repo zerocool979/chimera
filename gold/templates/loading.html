@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Loading - zerocool979</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8860B;
+            --light-gold: #F5E8C0;
+            --deep-burgundy: #800020;
+            --dark-burgundy: #5A0017;
+            --navy-blue: #13274F;
+            --cream: #F7F2E6;
+            --dark-wood: #3C2A1E;
+            --light-wood: #7A5C3C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, var(--navy-blue), var(--dark-wood));
+            color: var(--cream);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Efek visual royal */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom, 
+                rgba(212, 175, 55, 0.05), 
+                rgba(212, 175, 55, 0.05) 1px, 
+                transparent 1px, 
+                transparent 3px
+            );
+            pointer-events: none;
+            z-index: 100;
+            animation: scanline 10s linear infinite;
+        }
+
+        @keyframes scanline {
+            from { background-position-y: 0; } 
+            to { background-position-y: 100px; }
+        }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/upuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1afLUkx8QnrIDQk2l0ScGzAAAAAElFTkSuQmCC');
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .royal-cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        .royal-cursor::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .crystal-ring {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
+            perspective: 1000px;
+        }
+
+        .crystal {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, transparent 40%, rgba(212, 175, 55, 0.3), transparent 60%);
+            animation: rotate 20s linear infinite;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .crystal::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, transparent 40%, rgba(212, 175, 55, 0.1), transparent 60%);
+            animation: rotate 15s linear infinite reverse;
+            z-index: -1;
+        }
+
+        .crystal-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(35, 25, 20, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--dark-gold);
+        }
+
+        .royal-seal {
+            width: 120px;
+            height: 120px;
+            border: 3px solid var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(35, 25, 20, 0.5);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .royal-seal::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--primary-gold);
+            border-radius: 50%;
+        }
+
+        .royal-seal i {
+            font-size: 50px;
+            color: var(--primary-gold);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary-gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            letter-spacing: 4px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+            margin: 0 auto;
+            width: 50%;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--light-gold);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .progress-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(35, 25, 20, 0.5);
+            height: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--dark-gold);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--dark-burgundy), var(--primary-gold));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-text {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: var(--light-gold);
+        }
+
+        .loading-dots {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .loading-dots span {
+            animation: blink 1.5s infinite;
+            opacity: 0;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .ornament {
+            position: fixed;
+            font-size: 2rem;
+            color: var(--primary-gold);
+            opacity: 0.3;
+            z-index: 50;
+            animation: glimmer 4s infinite;
+        }
+
+        .ornament-1 {
+            top: 20%;
+            left: 10%;
+        }
+
+        .ornament-2 {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .ornament-3 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .ornament-4 {
+            bottom: 30%;
+            left: 15%;
+            animation-delay: 3s;
+        }
+
+        @keyframes glimmer {
+            0% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+            100% { opacity: 0.3; transform: scale(1); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .message {
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--light-gold);
+            opacity: 0.8;
+            z-index: 20;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .crystal-ring {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .crystal-inner {
+                width: 170px;
+                height: 170px;
+            }
+            
+            .royal-seal {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .royal-seal i {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    <div class="royal-cursor"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="ornament ornament-1">✦</div>
+    <div class="ornament ornament-2">✦</div>
+    <div class="ornament ornament-3">❦</div>
+    <div class="ornament ornament-4">❦</div>
+    
+    <div class="container">
+        <div class="crystal-ring">
+            <div class="crystal"></div>
+            <div class="crystal-inner">
+                <div class="royal-seal">
+                    <i class="fas fa-crown"></i>
+                </div>
+            </div>
+        </div>
+        
+        <h1>ROYAL ENTRANCE</h1>
+        <p class="subtitle">Preparing an extraordinary experience for Your Highness</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <p class="progress-text">Loading majestic content<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></p>
+    </div>
+    
+    <p class="message">Please wait while we prepare something truly magnificent</p>
+
+    <script>
+        // Menggerakkan kursor royal
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.royal-cursor');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Efek hover pada elemen interaktif
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.matches('.crystal-ring, .royal-seal, .progress-container')) {
+                document.querySelector('.royal-cursor').style.transform = 'translate(-50%, -50%) scale(1.5)';
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.matches('.crystal-ring, .royal-seal, .progress-container')) {
+                document.querySelector('.royal-cursor').style.transform = 'translate(-50%, -50%) scale(1)';
+            }
+        });
+
+        // Membuat partikel jatuh
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Posisi acak
+                const left = Math.random() * 100;
+                const animationDuration = 5 + Math.random() * 10;
+                const animationDelay = Math.random() * 5;
+                const size = 2 + Math.random() * 3;
+                const opacity = 0.2 + Math.random() * 0.5;
+                
+                particle.style.left = `${left}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                particle.style.opacity = opacity;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Simulasi progress loading
+        function simulateProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            let progress = 0;
+            const targetProgress = 100;
+            const duration = 5000; // 5 detik
+            const interval = 50; // Update setiap 50ms
+            const steps = duration / interval;
+            const increment = targetProgress / steps;
+            
+            const progressInterval = setInterval(() => {
+                progress += increment;
+                progressBar.style.width = `${progress}%`;
+                
+                // Efek visual tambahan saat progress bertambah
+                if (progress % 20 < 1) {
+                    document.querySelector('.royal-seal').style.animation = 'none';
+                    setTimeout(() => {
+                        document.querySelector('.royal-seal').style.animation = 'pulse 2s ease-in-out infinite';
+                    }, 10);
+                }
+                
+                if (progress >= targetProgress) {
+                    clearInterval(progressInterval);
+                    progressBar.style.width = '100%';
+                    
+                    // Redirect setelah loading selesai
+                    setTimeout(() => {
+                        document.body.style.opacity = '0';
+                        setTimeout(() => {
+                            // Ganti dengan URL tujuan yang diinginkan
+                            window.location.href = "/{{ target }}";
+                        }, 1000);
+                    }, 1000);
+                }
+            }, interval);
+        }
+
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            simulateProgress();
+            
+            // Efek teks berkedip acak
+            const subtitle = document.querySelector('.subtitle');
+            const originalText = subtitle.textContent;
+            
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    subtitle.style.textShadow = '0 0 10px var(--primary-gold)';
+                    setTimeout(() => {
+                        subtitle.style.textShadow = 'none';
+                    }, 300);
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

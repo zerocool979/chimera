@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan Bahasa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/bahasa-style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    <div class="royal-cursor"></div>
+    
+    <div class="ornament ornament-1">✦</div>
+    <div class="ornament ornament-2">✦</div>
+    <div class="ornament ornament-3">❦</div>
+    <div class="ornament ornament-4">❦</div>
+    
+    <div class="container">
+        <div class="royal-seal">
+            <i class="fas fa-crown"></i>
+        </div>
+        
+        <h1>PILIH BAHASA</h1>
+        <p class="subtitle">Pilih bahasa yang ingin Anda gunakan</p>
+        
+        <div class="language-container">
+            <div class="language-option" data-lang="id">
+                <div class="language-card">
+                    <div class="card-front">
+                        <div class="flag">🇮🇩</div>
+                        <h3 class="language-name">Bahasa Indonesia</h3>
+                        <p class="language-desc">Bahasa resmi negara Indonesia</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="flag">🇮🇩</div>
+                        <h3 class="language-name">Indonesian</h3>
+                        <p class="language-desc">The official language of Indonesia</p>
+                    </div>
+                </div>
+                <button class="select-button">Pilih Bahasa</button>
+            </div>
+            
+            <div class="language-option" data-lang="en">
+                <div class="language-card">
+                    <div class="card-front">
+                        <div class="flag">🇺🇸</div>
+                        <h3 class="language-name">English</h3>
+                        <p class="language-desc">International language</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="flag">🇺🇸</div>
+                        <h3 class="language-name">English</h3>
+                        <p class="language-desc">Bahasa internasional</p>
+                    </div>
+                </div>
+                <button class="select-button">Select Language</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="confirmation" id="confirmation">
+        <div class="confirmation-content">
+            <h2 id="confirm-title">Konfirmasi Pilihan</h2>
+            <p id="confirm-message">Apakah Anda yakin ingin menggunakan Bahasa Indonesia sebagai bahasa default?</p>
+            <div class="confirmation-buttons">
+                <button class="confirmation-button confirm" id="confirm-button">Ya</button>
+                <button class="confirmation-button cancel" id="cancel-button">Batal</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        &copy; 2023 zerocool979 - Royal Language Selector
+    </div>
+
+    <script>
+        // Menggerakkan kursor royal
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.royal-cursor');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Efek hover pada elemen interaktif
+        document.querySelectorAll('.language-option, .select-button, .confirmation-button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.querySelector('.royal-cursor').style.transform = 'translate(-50%, -50%) scale(1.5)';
+            });
+            el.addEventListener('mouseleave', () => {
+                document.querySelector('.royal-cursor').style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+
+        // Logika pemilihan bahasa
+        const confirmation = document.getElementById('confirmation');
+        const confirmTitle = document.getElementById('confirm-title');
+        const confirmMessage = document.getElementById('confirm-message');
+        const confirmButton = document.getElementById('confirm-button');
+        const cancelButton = document.getElementById('cancel-button');
+        
+        let selectedLanguage = '';
+        
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('select-button')) return;
+                
+                selectedLanguage = option.getAttribute('data-lang');
+                
+                if (selectedLanguage === 'id') {
+                    confirmTitle.textContent = 'Konfirmasi Pilihan';
+                    confirmMessage.textContent = 'Apakah Anda yakin ingin menggunakan Bahasa Indonesia sebagai bahasa default?';
+                    confirmButton.textContent = 'Ya';
+                    cancelButton.textContent = 'Batal';
+                } else {
+                    confirmTitle.textContent = 'Confirmation';
+                    confirmMessage.textContent = 'Are you sure you want to use English as the default language?';
+                    confirmButton.textContent = 'Yes';
+                    cancelButton.textContent = 'Cancel';
+                }
+                
+                confirmation.classList.add('active');
+            });
+        });
+        
+        confirmButton.addEventListener('click', () => {
+            // Simpan preferensi bahasa (bisa menggunakan localStorage)
+            localStorage.setItem('preferredLanguage', selectedLanguage);
+            
+            // Tampilkan pesan sukses
+            if (selectedLanguage === 'id') {
+                alert('Bahasa Indonesia telah dipilih! Terima kasih.');
+                window.location.href = "/go/dashboard";
+            } else {
+                alert('English has been selected! Thank you.');
+                window.location.href = "/go/dashboard";
+            }
+            
+            confirmation.classList.remove('active');
+        });
+        
+        cancelButton.addEventListener('click', () => {
+            confirmation.classList.remove('active');
+        });
+        
+        // Tutup konfirmasi ketika klik di luar
+        confirmation.addEventListener('click', (e) => {
+            if (e.target === confirmation) {
+                confirmation.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

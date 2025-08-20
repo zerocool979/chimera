@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROYAL ACCESS: zerocool979</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/sT4rt-style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    
+    <div class="ornament ornament-1">✦</div>
+    <div class="ornament ornament-2">✦</div>
+    <div class="ornament ornament-3">❦</div>
+    <div class="ornament ornament-4">❦</div>
+    
+    <div class="container">
+        <div class="royal-seal">
+            <i class="fas fa-crown"></i>
+        </div>
+        
+        <div class="header">
+            <h1>ROYAL ACCESS: zerocool979</h1>
+            <p class="subtitle">Secure Connection: [ENCRYPTED]</p>
+        </div>
+        
+        <div class="terminal" id="terminal">
+            <div class="terminal-line" id="line1"></div>
+            <div class="terminal-line" id="line2"></div>
+            <div class="terminal-line" id="line3"></div>
+            <div class="terminal-line" id="line4"></div>
+            <div class="terminal-line" id="line5"></div>
+            <div class="terminal-line" id="line6"></div>
+            <div class="terminal-line" id="line7"></div>
+        </div>
+        
+        <div id="continue-prompt">
+            <p>Royal access granted</p>
+            <div class="key-prompt">Press any key to enter the kingdom</div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load Font Awesome for icons
+            const faLink = document.createElement('link');
+            faLink.rel = 'stylesheet';
+            faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+            document.head.appendChild(faLink);
+            
+            const cursor = document.querySelector('.cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            const typeSound = new Howl({
+                src: ["/static/audio/mengetik.mp3"],
+                volume: 0.3,
+                rate: 0.8
+            });
+            
+            // Terminal messages with royal theme
+            const messages = [
+                "[ROYAL GATEWAY: 192.168.0.13] > Establishing connection...",
+                "[SYS] Access level: ROYAL GUEST",
+                "[NOTICE] Royal encryption protocols activated",
+                "Execute: royal_entry --authority crown",
+                "███   Gaining entry to the kingdom ███",
+                "Initiating royal audience protocol...",
+                ">> Awaiting your command, Your Highness..."
+            ];
+            
+            let index = 0;
+            let typingActive = true;
+            
+            function typeLine() {
+                if (index < messages.length) {
+                    const lineId = `line${index + 1}`;
+                    const line = document.getElementById(lineId);
+                    const text = messages[index];
+                    let charIndex = 0;
+                    
+                    const typeChar = () => {
+                        if (charIndex < text.length && typingActive) {
+                            line.textContent = text.substring(0, charIndex + 1);
+                            charIndex++;
+                            
+                            const currentChar = text.charAt(charIndex - 1);
+                            if (currentChar.match(/[a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+\=\-]/)) {
+                                typeSound.play();
+                            }
+                            
+                            setTimeout(typeChar, Math.random() * 50 + 30);
+                        } else if (typingActive) {
+                            // Add blinking cursor at end of line
+                            line.innerHTML = text + '<span class="cursor-anim">█</span>';
+                            index++;
+                            
+                            if (index === messages.length) {
+                                document.addEventListener('keydown', proceedToApp);
+                                document.addEventListener('click', proceedToApp);
+                            } else {
+                                setTimeout(typeLine, 500);
+                            }
+                        }
+                    };
+                    
+                    typeChar();
+                }
+            }
+            
+            function proceedToApp() {
+                if (!typingActive) return;
+                
+                typingActive = false;
+                document.removeEventListener('keydown', proceedToApp);
+                document.removeEventListener('click', proceedToApp);
+                
+                document.body.style.animation = 'fadeOut 1s forwards';
+                
+                setTimeout(() => {
+                    window.location.href = "{{ url_for('bahasa') }}";
+                }, 1000);
+            }
+            
+            // Add fadeOut animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeOut {
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            setTimeout(typeLine, 1000);
+        });
+    </script>
+</body>
+</html>

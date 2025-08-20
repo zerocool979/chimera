@@ -1,0 +1,607 @@
+:root {
+    --night-sky: linear-gradient(to bottom, #0a0a1f 0%, #1a1a3a 40%, #2d2d5a 100%);
+    --day-sky: linear-gradient(to bottom, #87CEEB 0%, #1E90FF 40%, #4682B4 100%);
+    --ground-night: #1e3d14;
+    --ground-day: #3d6b1f;
+    --moon-color: #f8f8d0;
+    --sun-color: #ffdb4d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+body {
+    background: #000;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23ffffff'/%3E%3C/svg%3E"), auto;
+}
+
+#game-container {
+    position: relative;
+    width: 1000px;
+    height: 600px;
+    border: 8px solid #4a4a8a;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+
+#scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--night-sky);
+    transition: background 3s ease;
+}
+
+/* Sky Elements */
+#sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 4s infinite alternate;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.2; }
+}
+
+.moon {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    width: 80px;
+    height: 80px;
+    background: var(--moon-color);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 0 4px #e0e0a0,
+        0 0 0 8px #d0d090,
+        0 0 30px 15px rgba(248, 248, 208, 0.5);
+    z-index: 2;
+    transition: all 3s ease;
+}
+
+.sun {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    width: 80px;
+    height: 80px;
+    background: var(--sun-color);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 0 4px #ffc107,
+        0 0 0 8px #ff9800,
+        0 0 40px 20px rgba(255, 152, 0, 0.6);
+    z-index: 2;
+    opacity: 0;
+    transition: all 3s ease;
+}
+
+.constellation {
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    background-image: 
+        linear-gradient(45deg, transparent 49%, rgba(255,255,255,0.7) 50%, transparent 51%),
+        linear-gradient(-45deg, transparent 49%, rgba(255,255,255,0.7) 50%, transparent 51%);
+    background-size: 20px 20px;
+    opacity: 0.6;
+    animation: pulse 5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; }
+    100% { opacity: 0.8; }
+}
+
+/* Hills and Mountains */
+.hills {
+    position: absolute;
+    bottom: 30%;
+    width: 100%;
+    height: 40%;
+    z-index: 5;
+}
+
+.hill {
+    position: absolute;
+    bottom: 0;
+    background: #0d1c2e;
+    border-top: 4px solid #1a3a5f;
+    z-index: 5;
+    box-shadow: inset 0 8px 0 rgba(26, 58, 95, 0.5);
+}
+
+.hill-far {
+    width: 600px;
+    height: 150px;
+    left: 50px;
+    border-radius: 300px 300px 0 0;
+    filter: brightness(0.6);
+    z-index: 5;
+}
+
+.hill-mid {
+    width: 700px;
+    height: 180px;
+    left: 150px;
+    border-radius: 350px 350px 0 0;
+    filter: brightness(0.8);
+    z-index: 6;
+}
+
+.hill-near {
+    width: 800px;
+    height: 220px;
+    left: 100px;
+    border-radius: 400px 400px 0 0;
+    z-index: 7;
+}
+
+/* Ground and Vegetation */
+#ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: var(--ground-night);
+    border-top: 4px solid #2a5220;
+    z-index: 10;
+    transition: background 3s ease, border-color 3s ease;
+}
+
+.grass {
+    position: absolute;
+    bottom: 40px;
+    height: 15px;
+    background: #2a5220;
+    z-index: 11;
+}
+
+/* Pine Trees */
+.pines {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    height: 200px;
+    z-index: 12;
+}
+
+.pine {
+    position: absolute;
+    bottom: 0;
+    width: 50px;
+    z-index: 12;
+}
+
+.pine-trunk {
+    position: absolute;
+    bottom: 0;
+    left: 23px;
+    width: 4px;
+    height: 60px;
+    background: #5d4037;
+    z-index: 12;
+}
+
+.pine-top {
+    position: absolute;
+    bottom: 40px;
+    left: 15px;
+    width: 20px;
+    height: 40px;
+    background: #2e7d32;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    z-index: 12;
+}
+
+.pine-mid {
+    position: absolute;
+    bottom: 25px;
+    left: 10px;
+    width: 30px;
+    height: 50px;
+    background: #2e7d32;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    z-index: 12;
+}
+
+.pine-base {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    width: 40px;
+    height: 60px;
+    background: #2e7d32;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    z-index: 12;
+}
+
+/* Character */
+#character {
+    position: absolute;
+    bottom: 40px;
+    left: 350px;
+    width: 30px;
+    height: 60px;
+    z-index: 20;
+    transition: transform 0.2s ease;
+}
+
+.char-head {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background: #ffdbac;
+    border-radius: 50%;
+    z-index: 21;
+}
+
+.char-body {
+    position: absolute;
+    top: 18px;
+    width: 30px;
+    height: 40px;
+    background: #4a148c;
+    z-index: 20;
+}
+
+.char-arm {
+    position: absolute;
+    top: 18px;
+    width: 10px;
+    height: 25px;
+    background: #4a148c;
+    z-index: 19;
+    transform-origin: top center;
+}
+
+.char-arm-left {
+    left: -10px;
+}
+
+.char-arm-right {
+    right: -10px;
+}
+
+.char-leg {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 25px;
+    background: #4a148c;
+    z-index: 19;
+}
+
+.char-leg-left {
+    left: 5px;
+}
+
+.char-leg-right {
+    right: 5px;
+}
+
+/* Campfire */
+#campfire {
+    position: absolute;
+    bottom: 40px;
+    left: 550px;
+    width: 50px;
+    height: 70px;
+    z-index: 15;
+    cursor: pointer;
+}
+
+.logs {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    z-index: 16;
+}
+
+.log {
+    position: absolute;
+    bottom: 0;
+    width: 40px;
+    height: 8px;
+    background: #5d4037;
+    border-radius: 2px;
+    z-index: 16;
+}
+
+.log1 { left: 0; transform: rotate(20deg); }
+.log2 { left: 15px; transform: rotate(-10deg); }
+.log3 { left: 30px; transform: rotate(15deg); }
+
+.flames {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    z-index: 17;
+}
+
+.flame {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 40px;
+    background: #ff9800;
+    border-radius: 50% 50% 20% 20%;
+    animation: flicker 0.8s infinite alternate;
+    z-index: 17;
+    filter: blur(1px);
+}
+
+.flame1 { left: 20px; animation-delay: 0s; }
+.flame2 { left: 10px; animation-delay: 0.2s; height: 35px; bottom: 5px; }
+.flame3 { left: 30px; animation-delay: 0.4s; height: 30px; bottom: 10px; }
+
+@keyframes flicker {
+    0% { 
+        height: 40px; 
+        background: #ff9800; 
+        box-shadow: 0 0 15px #ff5722, 0 0 30px #ff5722;
+    }
+    100% { 
+        height: 50px; 
+        background: #ff5722; 
+        box-shadow: 0 0 25px #ff9800, 0 0 50px #ff9800;
+    }
+}
+
+.fire-glow {
+    position: absolute;
+    bottom: 0;
+    left: -30px;
+    width: 110px;
+    height: 80px;
+    background: rgba(255, 152, 0, 0.2);
+    border-radius: 50%;
+    animation: glow-pulse 3s infinite alternate;
+    filter: blur(8px);
+    z-index: 14;
+    opacity: 0.5;
+}
+
+@keyframes glow-pulse {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    100% { transform: scale(1.3); opacity: 0.7; }
+}
+
+/* Meteor Effects */
+.meteor {
+    position: absolute;
+    top: 0;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    box-shadow: 0 0 10px 3px white;
+    border-radius: 50%;
+    z-index: 3;
+    opacity: 0;
+}
+
+/* Fireflies */
+.firefly {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 3px yellow;
+    z-index: 8;
+    opacity: 0.8;
+}
+
+/* UI Elements */
+#ui-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+#title {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 36px;
+    color: #e0f7fa;
+    text-shadow: 
+        3px 3px 0 #006064,
+        6px 6px 0 #004d40;
+    letter-spacing: 4px;
+    animation: titleFloat 5s infinite alternate ease-in-out;
+}
+
+@keyframes titleFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+.controls {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    gap: 15px;
+    pointer-events: auto;
+}
+
+.pixel-btn {
+    padding: 12px 24px;
+    background: #4a4a8a;
+    border: 3px solid #6a6aaa;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 
+        3px 3px 0 #2a2a6a,
+        6px 6px 0 #1a1a4a;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.pixel-btn:hover {
+    background: #6a6aaa;
+    transform: translate(3px, 3px);
+    box-shadow: 
+        0 0 0 #2a2a6a,
+        3px 3px 0 #1a1a4a;
+}
+
+#stats {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 14px;
+    color: #e0f7fa;
+    text-shadow: 2px 2px 0 #006064;
+    line-height: 1.6;
+}
+
+#time-display {
+    position: absolute;
+    top: 100px;
+    right: 30px;
+    font-size: 18px;
+    color: #e0f7fa;
+    text-shadow: 2px 2px 0 #006064;
+}
+
+#fullscreen-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    z-index: 100;
+    pointer-events: auto;
+}
+
+#instructions {
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #e0f7fa;
+    text-shadow: 1px 1px 0 #006064;
+    opacity: 0.8;
+}
+
+/* Particle Effects */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9;
+}
+
+/* Day Mode Styles */
+.day-mode #scene {
+    background: var(--day-sky);
+}
+
+.day-mode #ground {
+    background: var(--ground-day);
+    border-top: 4px solid #4a8529;
+}
+
+.day-mode .moon {
+    opacity: 0;
+}
+
+.day-mode .sun {
+    opacity: 1;
+}
+
+.day-mode .star {
+    opacity: 0;
+}
+
+.day-mode .fire-glow {
+    opacity: 0.3;
+}
+
+.day-mode .flame {
+    filter: none;
+}
+
+/* Animations */
+@keyframes breathe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes armSwing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(25deg); }
+}
+
+@keyframes legWalk {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+    #game-container {
+        width: 95vw;
+        height: 57vw;
+    }
+    
+    #title {
+        font-size: 24px;
+    }
+}
+
+@media (max-height: 700px) {
+    #game-container {
+        height: 95vh;
+        width: 158.33vh;
+    }
+}

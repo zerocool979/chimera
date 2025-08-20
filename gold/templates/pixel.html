@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Adventure Ultimate</title>
+
+    <!-- Google Font Retro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../static/css/pixel-style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="scene-container">
+            <!-- ================= NIGHT FOREST SCENE ================= -->
+            <div id="night-forest" class="scene">
+                <div class="sky">
+                    <div class="stars" id="forest-stars"></div>
+                    <div class="moon"></div>
+                    <div class="sun"></div>
+                    <div class="constellation" style="top: 100px; left: 200px;"></div>
+                </div>
+
+                <div class="hills">
+                    <div class="hill hill-far"></div>
+                    <div class="hill hill-mid"></div>
+                    <div class="hill hill-near"></div>
+                </div>
+
+                <div class="ground">
+                    <div class="pines" id="forest-pines"></div>
+                    
+                    <!-- Main Character -->
+                    <div class="character" id="main-character">
+                        <div class="char-head"></div>
+                        <div class="char-body"></div>
+                        <div class="char-arm char-arm-left"></div>
+                        <div class="char-arm char-arm-right"></div>
+                        <div class="char-leg char-leg-left"></div>
+                        <div class="char-leg char-leg-right"></div>
+                    </div>
+                    
+                    <!-- Campfire -->
+                    <div class="campfire">
+                        <div class="fire-glow"></div>
+                        <div class="flames">
+                            <div class="flame flame1"></div>
+                            <div class="flame flame2"></div>
+                            <div class="flame flame3"></div>
+                        </div>
+                        <div class="logs">
+                            <div class="log log1"></div>
+                            <div class="log log2"></div>
+                            <div class="log log3"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- NPC Elder -->
+                    <div class="npc" id="forest-npc" style="position: absolute; bottom: 40px; left: 700px; width: 30px; height: 60px; z-index: 18;">
+                        <div style="position: absolute; top: 0; left: 5px; width: 20px; height: 20px; background: #ff9999; border-radius: 50%;"></div>
+                        <div style="position: absolute; top: 18px; width: 30px; height: 40px; background: #993366; z-index: 18;"></div>
+                    </div>
+                </div>
+                <div class="weather" id="forest-weather"></div>
+            </div>
+
+            <!-- ================= MOUNTAIN SCENE ================= -->
+            <div id="mountain" class="scene">
+                <div class="sky">
+                    <div class="stars" id="mountain-stars"></div>
+                    <div class="moon"></div>
+                    <div class="sun"></div>
+                </div>
+
+                <div class="mountain-peak">
+                    <div class="mountain-snow"></div>
+                </div>
+
+                <div class="mountain-trees" id="mountain-pines"></div>
+
+                <div class="ground" style="background: #2c3e50; border-top: 5px solid #3a506b;">
+                    <div class="character" style="left: 500px;">
+                        <div class="char-head"></div>
+                        <div class="char-body"></div>
+                    </div>
+
+                    <!-- Cave Entrance -->
+                    <div id="cave-entrance" style="position: absolute; bottom: 40px; left: 300px; width: 80px; height: 60px; background: #1a2530; border-radius: 50% 50% 0 0; cursor: pointer; z-index: 15;"></div>
+                </div>
+                <div class="weather" id="mountain-weather"></div>
+            </div>
+
+            <!-- ================= CAVE SCENE ================= -->
+            <div id="cave" class="scene">
+                <div class="cave-entrance">
+                    <div class="cave-interior">
+                        <div class="cave-crystals">
+                            <div class="crystal" style="top: 30px; left: 50px;"></div>
+                            <div class="crystal" style="top: 60px; left: 120px;"></div>
+                            <div class="crystal" style="top: 40px; left: 200px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ground" style="background: #1a2530; border-top: 5px solid #2c3e50;">
+                    <div class="character" style="left: 600px;">
+                        <div class="char-head"></div>
+                        <div class="char-body" style="background: #663399;"></div>
+                    </div>
+                    <!-- Treasure Chest -->
+                    <div id="treasure-chest" style="position: absolute; bottom: 40px; left: 400px; width: 50px; height: 30px; background: #d4af37; z-index: 15; cursor: pointer;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= UI CONTAINER ================= -->
+        <div id="ui-container">
+            <div id="title">PIXEL ADVENTURE ULTIMATE</div>
+
+            <div class="panel" id="control-panel">
+                <button id="day-night-btn" class="pixel-btn">Day/Night</button>
+                <button id="weather-btn" class="pixel-btn">Weather</button>
+                <button id="scene-btn" class="pixel-btn">Scene</button>
+                <button id="meteor-btn" class="pixel-btn">Meteors</button>
+                <button id="firefly-btn" class="pixel-btn">Fireflies</button>
+                <button id="quest-btn" class="pixel-btn">Quests</button>
+            </div>
+
+            <div class="panel" id="stats-panel">
+                <div class="stat-item"><span>Meteors:</span><span id="meteor-count">0</span></div>
+                <div class="stat-item"><span>Fireflies:</span><span id="firefly-count">0</span></div>
+                <div class="stat-item"><span>Stars:</span><span id="star-count">0</span></div>
+                <div class="stat-item"><span>Gold:</span><span id="gold-count">0</span></div>
+                <div class="stat-item"><span>XP:</span><span id="xp-count">0</span></div>
+            </div>
+
+            <div class="panel" id="time-panel">
+                <div class="stat-item"><span>Time:</span><span id="time-display">Night</span></div>
+                <div class="stat-item"><span>Weather:</span><span id="weather-display">Clear</span></div>
+                <div class="stat-item"><span>Location:</span><span id="location-display">Forest</span></div>
+            </div>
+
+            <div class="panel" id="inventory-panel">
+                <div class="inventory-item">⚔️</div>
+                <div class="inventory-item">🛡️</div>
+                <div class="inventory-item">🔑</div>
+                <div class="inventory-item">💎</div>
+                <div class="inventory-item">🍖</div>
+                <div class="inventory-item">🔥</div>
+            </div>
+
+            <div class="panel" id="quest-panel">
+                <div class="quest-item">
+                    <div class="quest-title">MAIN QUEST: Find the Crystal Cave</div>
+                    <div>• Talk to the Elder in the Forest</div>
+                    <div>• Collect 5 Firefly Essences</div>
+                    <div>• Find the Mountain Cave</div>
+                </div>
+                <div class="quest-item">
+                    <div class="quest-title">SIDE QUEST: Campfire Tales</div>
+                    <div>• Light the campfire</div>
+                    <div>• Keep it burning for 1 minute</div>
+                </div>
+            </div>
+
+            <div id="minimap"></div>
+            <button id="fullscreen-btn" class="pixel-btn">[ ]</button>
+
+            <!-- Dialog Box -->
+            <div id="dialog-box">
+                <div id="dialog-text">Welcome, adventurer! The forest is full of mysteries. Would you like to embark on a quest?</div>
+                <div id="dialog-options">
+                    <button class="pixel-btn">Yes, I'm ready!</button>
+                    <button class="pixel-btn">Tell me more first</button>
+                    <button class="pixel-btn">Maybe later</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene Transition -->
+        <!--div class="scene-transition" id="scene-transition">--</div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="../static/js/pixel-script.js"></script>
+</body>
+</html>

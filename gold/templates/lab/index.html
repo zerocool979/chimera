@@ -1,0 +1,35 @@
+{# File: templates/lab.html #}
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="terminal-interface">
+    <div class="terminal-header">
+        <h2>SKILL LAB v1.0.3</h2>
+        <div class="status-indicator">EXPERIMENTAL</div>
+    </div>
+    
+    <div class="terminal-output">
+        <p>Initializing skill challenges...</p>
+        <p>> Security clearance: LEVEL 3</p>
+        <p>> Select a challenge to begin</p>
+    </div>
+    
+    <div class="lab-challenges">
+        <div class="challenge-card">
+            <h3>BASE64 DECODER</h3>
+            <p>Decode encrypted messages</p>
+            <a href="{{ url_for('main.challenge_base64') }}" class="btn-terminal">start</a>
+        </div>
+        
+        <div class="challenge-card">
+            <h3>LOGIC PUZZLE</h3>
+            <p>Solve the system puzzle</p>
+            <a href="{{ url_for('main.challenge_logic') }}" class="btn-terminal">start</a>
+        </div>
+    </div>
+    
+    <div class="navigation-buttons">
+        <a href="{{ url_for('main.dashboard') }}" class="btn-terminal">back</a>
+    </div>
+</div>
+{% endblock %}

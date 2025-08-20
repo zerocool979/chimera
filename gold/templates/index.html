@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚔️ 🛡️ 🔑</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="scene">
+            <div id="sky">
+                <div class="stars" id="stars-container"></div>
+                <div class="moon"></div>
+                <div class="sun"></div>
+                <div class="constellation" style="top: 100px; left: 200px;"></div>
+                <div class="constellation" style="top: 150px; left: 600px; transform: rotate(45deg);"></div>
+            </div>
+
+            <div class="hills">
+                <div class="hill hill-far"></div>
+                <div class="hill hill-mid"></div>
+                <div class="hill hill-near"></div>
+            </div>
+            
+            <div id="ground">
+                <div class="grass grass1" style="left: 5%; width: 40px;"></div>
+                <div class="grass grass2" style="left: 25%; width: 30px;"></div>
+                <div class="grass grass3" style="left: 80%; width: 50px;"></div>
+                
+                <div class="pines" id="pines-container"></div>
+                
+                <div id="character">
+                    <div class="char-head"></div>
+                    <div class="char-body"></div>
+                    <div class="char-arm char-arm-left"></div>
+                    <div class="char-arm char-arm-right"></div>
+                    <div class="char-leg char-leg-left"></div>
+                    <div class="char-leg char-leg-right"></div>
+                </div>
+                
+                <div id="campfire">
+                    <div class="fire-glow"></div>
+                    <div class="flames">
+                        <div class="flame flame1"></div>
+                        <div class="flame flame2"></div>
+                        <div class="flame flame3"></div>
+                    </div>
+                    <div class="logs">
+                        <div class="log log1"></div>
+                        <div class="log log2"></div>
+                        <div class="log log3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="ui-container">
+            <div id="title">hello world!</div>
+            
+            <div class="controls">
+                <button id="day-night-btn" class="pixel-btn">Day Mode</button>
+                <button id="meteor-btn" class="pixel-btn">Shoot Meteors</button>
+                <button id="firefly-btn" class="pixel-btn">Fireflies</button>
+            </div>
+            
+            <div id="stats">
+                <div>Meteors: <span id="meteor-count">0</span></div>
+                <div>Fireflies: <span id="firefly-count">0</span></div>
+                <div>Stars: <span id="star-count">0</span></div>
+            </div>
+            
+            <div id="time-display">Night Time</div>
+            
+            <button id="fullscreen-btn" class="pixel-btn">[ ]</button>
+            
+            <div id="instructions">Use Arrow Keys to Move | Click on Campfire to Toggle</div>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

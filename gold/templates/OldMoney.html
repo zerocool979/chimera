@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Aesthete's Gambit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/OldMoney-style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Bilal<span>.dev</span></div>
+            <nav class="nav-links">
+                <a href="#about">Tentang</a>
+                <a href="#skills">Skill</a>
+                <a href="#experience">Pengalaman</a>
+                <a href="#projects">Project</a>
+                <a href="#contact">Kontak</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <div class="greeting">
+                    <i class="fas fa-hand-wave"></i>
+                    Haloo!!!
+                </div>
+                <h1 class="hero-title">
+                    <span class="highlight">Bilal</span> a.k.a Beel a.k.a <span class="highlight">zerocool979</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Mahasiswa semester 3 Teknik Informatika yang mencoba mendalami passion di bidang Cyber Security dan Web Development. Si paling suka nikmatin vibes and view's langit malam, bulan, bintang dan lain-lain terkaitnya ditempat paling tinggi, sambil ngoding karna ngisi waktu aja itupun dibantu AI, ditemenin secangkir kopi plus dengerin lagu.
+                </p>   
+                <div class="social-links">
+                    <a href="https://github.com/zerocool979/" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/all_about_elll" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/6287711278508" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:bilalfarhani635@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="avatar">
+                    <div class="avatar-inner">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tentang</h2>
+                <p class="section-subtitle">Ga kenal maka jangan sokap. Udah kenal? cari tau lebih dalam lagi tentang gua di dunia IT</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Personal</h3>
+                    <p>
+                        Nama asli bilal, nama panggilan silih berganti beriringan waktu, orang-orang terdekat manggil beel, orang-orang special manggil bill, dan orang yang mungkin baru kenal gua manggil lal. 
+                        Di dunia digital, gua sering menggunakan nama zerocool979 (terinspirasi dari film btw..). Sekarang status gua adalah mahasiswa semester 3 di STMIK Tazkia, Fakultas Ilmu Komputer, Jurusan Teknik Informatika (FI-TI). Masih penasaran? cek kontak gua dibawah
+                    </p>
+                    
+                    <div class="identity-grid">
+                        <div class="identity-card">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h4>Pendidikan</h4>
+                            <p>STMIK Tazkia, Teknik Informatika (Semester 3)</p>
+                        </div>
+                        <div class="identity-card">
+                            <i class="fas fa-bullseye"></i>
+                            <h4>Cita-Cita</h4>
+                            <p>Makin gede makin labil, tapi tetep pengen jadi inspirasi… minimal buat kucing tetangga yang lagi nongkrong di genteng.</p>
+                        </div>
+                        <div class="identity-card">
+                            <i class="fas fa-mug-hot"></i>
+                            <h4>Hobi</h4>
+                            <p>Ngehalu, ngoding, nugas, menggambar, dengerin lagu, ngopi. Dan itu semua gua lakuin di tempat tertinggi diwaktu malam</p>
+                        </div>
+                        <div class="identity-card">
+                            <i class="fas fa-laptop-code"></i>
+                            <h4>Fokus</h4>
+                            <p>Cyber Security & Web Development</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="{{ url_for('static', filename='image/pp.jpg') }}" alt="Bilal Portrait">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Skill & Kemampuan</h2>
+                <p class="section-subtitle">Berbagai kemampuan yang gua kuasai dan terus dikembangkan</p>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Technical Skills</h3>
+                    <ul class="skill-list">
+                        <li>HTML & CSS <span>⭐⭐⭐⭐</span></li>
+                        <li>JavaScript <span>⭐⭐⭐</span></li>
+                        <li>Python <span>⭐⭐⭐⭐</span></li>
+                        <li>Networking Basics <span>⭐⭐⭐</span></li>
+                        <li>Penetration Testing <span>⭐⭐</span></li>
+                    </ul>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Soft Skills</h3>
+                    <ul class="skill-list">
+                        <li>Problem Solving <span>⭐⭐⭐⭐</span></li>
+                        <li>Debugging <span>⭐⭐⭐⭐⭐</span></li>
+                        <li>Fokus Intens <span>⭐⭐⭐⭐⭐</span></li>
+                        <li>Public Speaking <span>⭐⭐⭐</span></li>
+                        <li>Manajemen Waktu <span>⭐⭐⭐</span></li>
+                    </ul>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Passion & Minat</h3>
+                    <ul class="skill-list">
+                        <li>Cyber Security</li>
+                        <li>Web Development</li>
+                        <li>Open Source Projects</li>
+                        <li>Kopi & Musik Coding</li>
+                        <li>Belajar Hal Baru</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Pengalaman</h2>
+                <p class="section-subtitle">Perjalanan dan pengalaman di dunia Kampus dan IT</p>
+            </div>
+            
+            <div class="about-text" style="max-width: 800px; margin: 0 auto;">
+                <h3 style="text-align: center; margin-bottom: 30px; color: var(--primary-gold);">Perjalanan</h3>
+                
+                <div style="background: rgba(35, 25, 20, 0.8); padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--dark-gold);">
+                    <h4><i class="fas fa-user-graduate" style="color: var(--primary-gold); margin-right: 10px;"></i> Pendidikan</h4>
+                    <p>Mahasiswa Part-time di STMIK Tazkia, jurusan Teknik Informatika (2024 - Sekarang)</p>
+                </div>
+                
+                <div style="background: rgba(35, 25, 20, 0.8); padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--dark-gold);">
+                    <h4><i class="fas fa-laptop-code" style="color: var(--primary-gold); margin-right: 10px;"></i> Belajar Mandiri</h4>
+                    <p>Belajar penetration testing dari nol, mulai dari "apa itu IP" sampai "oh ini cara hacking..." melalui dosen spesialis dari kampus dan otodidak/praktik mandiri</p>
+                </div>
+                
+                <div style="background: rgba(35, 25, 20, 0.8); padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--dark-gold);">
+                    <h4><i class="fas fa-project-diagram" style="color: var(--primary-gold); margin-right: 10px;"></i> Project Kampus</h4>
+                    <p>Terlibat menjadi Security Team dalam pengembangan Mini Bank Tazkia - sebuah proyek perbankan digital untuk kampus (masih dalam progres)</p>
+                </div>
+                
+                <div style="background: rgba(35, 25, 20, 0.8); padding: 25px; border-radius: 15px; border: 1px solid var(--dark-gold);">
+                    <h4><i class="fas fa-code-branch" style="color: var(--primary-gold); margin-right: 10px;"></i> Repositori GitHub</h4>
+                    <p>Mengelola beberapa repositori GitHub yang berisi berbagai eksperimen coding dan project pribadi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Project & Karya</h2>
+                <p class="section-subtitle">Beberapa project yang pernah dikerjakan</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Security</span>
+                        </div>
+                        <h3>Security Scripts</h3>
+                        <p>Kumpulan script Python untuk keamanan jaringan dan penetration testing yang masih dalam pengembangan</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <h3>Website Eksperimen</h3>
+                        <p>Website iseng dengan layout mirip tugas kuliah tapi sebenarnya eksperimen pribadi untuk mencoba teknologi baru</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Web App</span>
+                            <span class="tag">Team Project</span>
+                        </div>
+                        <h3>Mini Bank Tazkia</h3>
+                        <p>Project kampus berupa sistem perbankan digital sederhana yang masih dalam tahap pengembangan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motto Section -->
+    <section class="motto-section">
+        <div class="container">
+            <div class="motto-content">
+                <i class="fas fa-quote-left"></i>
+                <p class="motto-text">
+                    "Last but not least, I wanna thank me. I wanna thank me for believing in me.
+                    I wanna thank me for doing all this hard work. I wanna thank me for having no days off.
+                    I wanna thank me for never quitting. I wanna thank me for always being a giver
+                    and tryna give more than I receive. I wanna thank me for tryna do more right than wrong.
+                    I wanna thank me for just being me at all times..."
+                </p>
+                <p class="author">- Snoop Dogg -</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">bilal</div>
+                    <p>
+                        Explorer di dunia cyber, coder pas lagi waras, dreamer pas lagi ngopi. Nama gua singkat tapi vibenya lebih ke <span class="highlight">zerocool979</span>.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://github.com/zerocool979/" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/all_about_elll" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6287711278508" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:bilalfarhani635@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Navigasi</h3>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#about">Tentang</a></li>
+                        <li><a href="#skills">Skill</a></li>
+                        <li><a href="#experience">Pengalaman</a></li>
+                        <li><a href="#projects">Project</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> bilal@zerocool979.dev</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bogor, Indonesia</li>
+                        <li><i class="fas fa-university"></i> STMIK Tazkia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button onclick="window.location.href='/go/dashboard'">  
+                    <i class="fas fa-gauge"></i> Kembali ke Dashboard
+                </button>
+
+
+                <button id="music-trigger-btn">
+                    <i class="fas fa-music"></i> Setel Musik
+                </button>
+                <audio id="audioPlayer"></audio>
+                <div id="music-overlay" class="overlay-container">
+                    <div class="blur-background"></div>
+                    <div id="music-panel" class="panel-container">
+                        <div id="view-main" class="panel-view active">
+                            <h2>Menu Musik</h2>
+                            <ul class="menu-list">
+                                <li data-action="play-mode" data-mode="loop"><i class="fas fa-sync-alt"></i> Looping</li>
+                                <li data-action="play-mode" data-mode="once"><i class="fas fa-redo"></i> Sekali Putar</li>
+                                <li data-action="create-playlist"><i class="fas fa-list-ol"></i> Buat Daftar Putar</li>
+                                <li data-action="close"><i class="fas fa-times"></i> Kembali</li>
+                            </ul>
+                        </div>
+
+                        <div id="view-song-list" class="panel-view">
+                            <h2>Pilih Lagu</h2>
+                            <ul id="song-list-container" class="song-list">
+                                </ul>
+                            <button class="back-btn" data-target="view-main"><i class="fas fa-arrow-left"></i> Kembali ke Menu</button>
+                        </div>
+
+                        <div id="view-playlist-creator" class="panel-view">
+                            <h2>Buat Daftar Putar</h2>
+                            <ul id="playlist-creator-container" class="song-list check-list">
+                                </ul>
+                            <button id="play-selected-btn" class="play-button"><i class="fas fa-play"></i> Putar Pilihan</button>
+                            <button class="back-btn" data-target="view-main"><i class="fas fa-arrow-left"></i> Kembali ke Menu</button>                          
+                        </div>
+                    </div>          
+                </div>
+
+                <button onclick="window.location.href='/go/Lobby'">
+                    <i class="fas fa-terminal"></i> Lanjut Eksplorasi 
+                </button>
+            </div>            
+            <div class="copyright">
+                &copy; 2023 Bilal a.k.a Beel a.k.a zerocool979. All rights reserved.
+            </div>
+    </footer>
+    <div id="notif" class="notif hidden"></div>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'rgba(20, 20, 20, 0.9)';
+            } else {
+                header.style.boxShadow = 'none';
+                header.style.background = 'rgba(20, 20, 20, 0.7)';
+            }
+        });
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.skill-card, .project-card, .identity-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const musicTriggerBtn = document.getElementById('music-trigger-btn');
+            const overlay = document.getElementById('music-overlay');
+            const panel = document.getElementById('music-panel');
+            const audioPlayer = document.getElementById('audioPlayer');
+
+            const mainView = document.getElementById('view-main');
+            const songListView = document.getElementById('view-song-list');
+            const playlistCreatorView = document.getElementById('view-playlist-creator');
+
+            const songListContainer = document.getElementById('song-list-container');
+            const playlistCreatorContainer = document.getElementById('playlist-creator-container');
+
+            let playMode = 'loop'; // 'loop', 'once', 'playlist'
+            let currentTrackIndex = 0;
+            let customPlaylist = [];
+
+            // PENTING: Ganti dengan nama file musik Anda dari folder /static/audio/
+            const songDatabase = [
+                { title: "Prom Queen", artist: "Beach Bunny", file: "BeachBunny-PromQueen.mp3" },
+                { title: "Eyes Blue x Heather", artist: "Fran Vasilic", file: "FranFacilċ-EyesBluexHeather.mp3" },
+                { title: "Death Bed", artist: "Powfu", file: "Powfu-deathbed.mp3" },
+                { title: "Lemon Tree", artist: "Fools Garden", file: "lemontree.mp3" },
+                // Tambahkan lagu lain di sini
+            ];
+
+            // --- Fungsi ---
+
+            // Fungsi untuk berpindah antar view di dalam panel
+            function switchView(viewId) {
+                document.querySelectorAll('.panel-view').forEach(view => view.classList.remove('active'));
+                document.getElementById(viewId).classList.add('active');
+            }
+
+            // Fungsi untuk memutar lagu
+            function playTrack(index) {
+                if (index < 0 || index >= songDatabase.length) return;
+                currentTrackIndex = index;
+                // Path ke file musik di folder static
+                audioPlayer.src = `/static/audio/${songDatabase[index].file}`;
+                audioPlayer.play().catch(e => console.error("Gagal memutar audio:", e));
+                overlay.classList.remove('active'); // Sembunyikan overlay setelah lagu dipilih
+                notify(`🎶 Memutar: ${songDatabase[index].title}`);
+            }
+
+            function notify(msg) {
+            const n = document.getElementById('notif');
+            n.textContent = msg;
+            n.classList.add('show');
+            n.classList.remove('hidden');
+            setTimeout(() => {
+                n.classList.remove('show');
+                setTimeout(() => n.classList.add('hidden'), 400);
+            }, 2000);
+            }
+
+            
+            // Fungsi untuk mengisi daftar lagu
+            function populateSongLists() {
+                songListContainer.innerHTML = '';
+                playlistCreatorContainer.innerHTML = '';
+
+                songDatabase.forEach((song, index) => {
+                    // Untuk view "Pilih Lagu"
+                    const liSong = document.createElement('li');
+                    liSong.innerHTML = `<i class="fas fa-music"></i> ${song.title} - <em>${song.artist}</em>`;
+                    liSong.addEventListener('click', () => playTrack(index));
+                    songListContainer.appendChild(liSong);
+
+                    // Untuk view "Buat Daftar Putar"
+                    const liCreator = document.createElement('li');
+                    liCreator.innerHTML = `
+                        <label>
+                            <input type="checkbox" data-index="${index}">
+                            <span>${song.title} - <em>${song.artist}</em></span>
+                        </label>
+                    `;
+                    playlistCreatorContainer.appendChild(liCreator);
+                });
+            }
+
+            // --- Event Listeners ---
+
+            // Tombol utama "Setel Musik"
+            musicTriggerBtn.addEventListener('click', () => {
+                overlay.classList.add('active');
+                switchView('view-main'); // Selalu mulai dari menu utama
+            });
+
+            // Aksi di dalam panel (menggunakan event delegation)
+            panel.addEventListener('click', (e) => {
+                const target = e.target.closest('li[data-action], button');
+                if (!target) return;
+
+                const action = target.dataset.action;
+                
+                if (action === 'close') {
+                    overlay.classList.remove('active');
+                    audioPlayer.pause();
+                }
+                
+                if (action === 'play-mode') {
+                    playMode = target.dataset.mode;
+                    audioPlayer.loop = (playMode === 'loop');
+                    switchView('view-song-list');
+                }
+
+                if (action === 'create-playlist') {
+                    switchView('view-playlist-creator');
+                }
+
+                // Tombol kembali di sub-menu
+                if (target.classList.contains('back-btn')) {
+                    switchView(target.dataset.target);
+                }
+                
+                // Tombol putar playlist pilihan
+                if (target.id === 'play-selected-btn') {
+                    customPlaylist = [];
+                    const checkboxes = playlistCreatorContainer.querySelectorAll('input:checked');
+                    checkboxes.forEach(cb => customPlaylist.push(parseInt(cb.dataset.index)));
+
+                    if (customPlaylist.length > 0) {
+                        playMode = 'playlist';
+                        audioPlayer.loop = false;
+                        currentTrackIndex = 0; // Mulai dari awal playlist kustom
+                        playTrack(customPlaylist[currentTrackIndex]);
+                    }
+                }
+            });
+
+            // Otomatis putar lagu selanjutnya
+            audioPlayer.addEventListener('ended', () => {
+                if (playMode === 'list' || playMode === 'once') { // Mode "sekali putar" akan berhenti di sini
+                    if (playMode !== 'once') {
+                        currentTrackIndex = (currentTrackIndex + 1) % songDatabase.length;
+                        playTrack(currentTrackIndex);
+                    }
+                } else if (playMode === 'playlist' && customPlaylist.length > 0) {
+                    currentTrackIndex = (currentTrackIndex + 1);
+                    if (currentTrackIndex < customPlaylist.length) {
+                        playTrack(customPlaylist[currentTrackIndex]);
+                    }
+                }
+            });
+            
+            // Inisialisasi
+            populateSongLists();
+        });
+    </script>
+    
+</body>
+</html>

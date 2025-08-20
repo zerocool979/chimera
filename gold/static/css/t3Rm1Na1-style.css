@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+}
+
+body {
+    background: #0a0a0a;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: none;
+}
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom, 
+        rgba(0, 255, 65, 0.03), 
+        rgba(0, 255, 65, 0.03) 1px, 
+        transparent 1px, 
+        transparent 3px
+    );
+    pointer-events: none;
+    z-index: 100;
+    animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+    from { background-position-y: 0; } 
+    to { background-position-y: 100px; }
+}
+
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1afLUkx8QnrIDQk2l0ScGzAAAAAElFTkSuQmCC');
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 99;
+}
+
+.glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 98;
+    opacity: 0.05;
+    animation: glitchOverlay 10s infinite;
+}
+
+@keyframes glitchOverlay {
+    0% { opacity: 0.02; }
+    5% { opacity: 0.1; }
+    10% { opacity: 0.03; }
+    15% { opacity: 0.06; }
+    20% { opacity: 0.04; }
+    100% { opacity: 0.02; }
+}
+
+.terminal-container {
+    width: 90%;
+    max-width: 800px;
+    height: 80vh;
+    background: rgba(10, 10, 10, 0.95);
+    border: 1px solid #00ff41;
+    border-radius: 2px;
+    box-shadow: 
+        0 0 15px rgba(0, 255, 65, 0.3),
+        inset 0 0 10px rgba(0, 255, 65, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.terminal-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    text-shadow: 0 0 5px #00ff41;
+}
+
+.terminal-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ff41, transparent);
+}
+
+.terminal-title {
+    font-size: 1.2rem;
+    animation: glitch 5s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { 
+        text-shadow: 
+            1px 0 #ff00ff, 
+            -1px 0 #00ffff;
+    }
+    20% { 
+        text-shadow: 
+            -1px 0 #ff00ff, 
+            1px 0 #00ffff;
+    }
+    40% { 
+        text-shadow: 
+            1px 0 #ff00ff, 
+            -1px 0 #00ffff;
+    }
+    60% { 
+        text-shadow: 
+            -1px 0 #ff00ff, 
+            1px 0 #00ffff;
+    }
+    80% { 
+        text-shadow: 
+            1px 0 #ff00ff, 
+            -1px 0 #00ffff;
+    }
+}
+
+.terminal-status {
+    display: flex;
+    gap: 10px;
+    font-size: 0.8rem;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 15px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0, 255, 65, 0.02) 0.5px,
+        transparent 0.5px
+    );
+    background-size: 100% 2px;
+    animation: terminalScan 20s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes terminalScan {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(100%); }
+}
+
+.output-container {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    scrollbar-width: none; /* Firefox */
+}
+
+.output-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.output-line {
+    margin-bottom: 8px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    text-shadow: 0 0 2px #00ff41;
+    line-height: 1.3;
+    font-size: 0.9rem;
+}
+
+.output-line.dir {
+    color: #00ffff;
+}
+
+.output-line.file {
+    color: #00ff41;
+}
+
+.output-line.error {
+    color: #ff00ff;
+}
+
+.output-line.system {
+    color: #a0a0c0;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prompt {
+    color: #00ffff;
+    text-shadow: 0 0 2px #00ffff;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+.command-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    outline: none;
+    caret-color: #00ff41;
+    text-shadow: 0 0 2px #00ff41;
+}
+
+.command-input::placeholder {
+    color: rgba(0, 255, 65, 0.5);
+}
+
+.help-container {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 5px 15px;
+    margin-top: 10px;
+}
+
+.help-command {
+    color: #00ffff;
+}
+
+.help-description {
+    color: #a0a0c0;
+}
+
+.hidden {
+    display: none;
+}
+
+.exit-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.exit-message {
+    text-align: center;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px #00ff41;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .terminal-container {
+        width: 95%;
+        height: 90vh;
+    }
+    
+    .terminal-title {
+        font-size: 1rem;
+    }
+    
+    .terminal-status {
+        font-size: 0.7rem;
+    }
+    
+    .prompt, .command-input, .output-line {
+        font-size: 0.8rem;
+    }
+}

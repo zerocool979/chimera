@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Adventure - Start</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a1f;
+            font-family: 'Press Start 2P', cursive, sans-serif;
+            color: #e0f7fa;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 
+                4px 4px 0 #006064,
+                8px 8px 0 #004d40;
+            letter-spacing: 5px;
+            animation: titleFloat 3s infinite alternate ease-in-out;
+        }
+        
+        @keyframes titleFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            text-shadow: 2px 2px 0 #006064;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #4a4a8a;
+            border: 4px solid #6a6aaa;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 
+                6px 6px 0 #2a2a6a,
+                12px 12px 0 #1a1a4a;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            margin: 20px;
+        }
+        
+        .btn:hover {
+            background: #6a6aaa;
+            transform: translate(6px, 6px);
+            box-shadow: 
+                0 0 0 #2a2a6a,
+                6px 6px 0 #1a1a4a;
+        }
+        
+        /* Background stars */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 4s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.2; }
+        }
+        
+        /* Character showcase */
+        .character {
+            width: 80px;
+            height: 120px;
+            position: relative;
+            margin: 30px auto;
+        }
+        
+        .char-head {
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: 20px;
+            height: 20px;
+            background: #ffdbac;
+            border-radius: 50%;
+        }
+        
+        .char-body {
+            position: absolute;
+            top: 20px;
+            width: 80px;
+            height: 60px;
+            background: #4a148c;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            width: 200px;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <h1>PIXEL ADVENTURE ULTIMATE</h1>
+        
+        <p>Selamat datang di petualangan pixel epik! Temukan dunia ajaib, selesaikan quest, dan kumpulkan harta karun dalam gaya 8-bit yang memukau.</p>
+        
+        <div class="character">
+            <div class="char-head"></div>
+            <div class="char-body"></div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🌌</div>
+                <h3>Dunia Dinamis</h3>
+                <p>Siklus siang-malam & sistem cuaca</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚔️</div>
+                <h3>RPG Kompleks</h3>
+                <p>Quest, inventory, dan karakter</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✨</div>
+                <h3>Efek Visual</h3>
+                <p>Meteor, kunang-kunang & partikel</p>
+            </div>
+        </div>
+        
+        <a href="/pixel" class="btn">Mulai Petualangan</a>
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            const size = 1 + Math.random() * 3;
+            const opacity = 0.3 + Math.random() * 0.7;
+            const duration = 2 + Math.random() * 4;
+            const delay = Math.random() * 5;
+            
+            star.style.cssText = `
+                top: ${top}%;
+                left: ${left}%;
+                width: ${size}px;
+                height: ${size}px;
+                opacity: ${opacity};
+                animation-duration: ${duration}s;
+                animation-delay: ${delay}s;
+            `;
+            
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>

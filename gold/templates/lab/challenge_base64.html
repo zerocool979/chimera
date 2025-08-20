@@ -1,0 +1,37 @@
+{# File: templates/challenge_base64.html #}
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="terminal-interface">
+    <div class="terminal-header">
+        <h2>BASE64 DECODER CHALLENGE</h2>
+        <div class="status-indicator">ACTIVE</div>
+    </div>
+    
+    <div class="terminal-output">
+        <p>Challenge: Decode the secret message</p>
+        <p>> Encrypted: VGhlIGFuc3dlciBpcyA0Mg==</p>
+        {% if result %}
+        <div class="challenge-result">
+            <p>> Result: {{ result }}</p>
+        </div>
+        {% endif %}
+    </div>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label for="text" class="terminal-prompt">Enter text:</label>
+            <input type="text" name="text" id="text" class="terminal-input">
+        </div>
+        
+        <div class="form-buttons">
+            <button type="submit" name="action" value="encode" class="btn-terminal">Encode</button>
+            <button type="submit" name="action" value="decode" class="btn-terminal">Decode</button>
+        </div>
+    </form>
+    
+    <div class="navigation-buttons">
+        <a href="{{ url_for('main.lab') }}" class="btn-terminal">back</a>
+    </div>
+</div>
+{% endblock %}
